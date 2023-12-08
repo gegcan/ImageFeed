@@ -147,15 +147,17 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="UYM-YC-Rfu">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="fA6-Xv-5vI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="11" translatesAutoresizingMaskIntoConstraints="NO" id="fA6-Xv-5vI">
+                                        <rect key="frame" x="18" y="0.0" width="393" height="852"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="fA6-Xv-5vI" secondAttribute="bottom" id="ETH-Lc-s3x"/>
-                                    <constraint firstAttribute="trailing" secondItem="fA6-Xv-5vI" secondAttribute="trailing" id="VP7-Ek-EJc"/>
-                                    <constraint firstItem="fA6-Xv-5vI" firstAttribute="leading" secondItem="UYM-YC-Rfu" secondAttribute="leading" id="Y4e-MW-xFe"/>
-                                    <constraint firstItem="fA6-Xv-5vI" firstAttribute="top" secondItem="UYM-YC-Rfu" secondAttribute="top" id="cqH-8i-R06"/>
+                                    <constraint firstItem="fA6-Xv-5vI" firstAttribute="height" secondItem="xJ1-5h-UF0" secondAttribute="height" id="22C-qs-Uhp"/>
+                                    <constraint firstItem="fA6-Xv-5vI" firstAttribute="width" secondItem="xJ1-5h-UF0" secondAttribute="width" id="6Wy-ME-BU3"/>
+                                    <constraint firstItem="fA6-Xv-5vI" firstAttribute="bottom" secondItem="ssq-uK-ita" secondAttribute="bottom" id="YEJ-CE-Oub"/>
+                                    <constraint firstItem="fA6-Xv-5vI" firstAttribute="trailing" secondItem="ssq-uK-ita" secondAttribute="trailing" id="coi-Di-a2G"/>
+                                    <constraint firstItem="fA6-Xv-5vI" firstAttribute="top" secondItem="ssq-uK-ita" secondAttribute="top" id="d27-nw-K4B"/>
+                                    <constraint firstItem="fA6-Xv-5vI" firstAttribute="leading" secondItem="ssq-uK-ita" secondAttribute="leading" id="f87-Cr-m3u"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="xJ1-5h-UF0"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="ssq-uK-ita"/>
@@ -205,11 +207,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q3L-xj-T7O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="393" y="-454"/>
+            <point key="canvasLocation" x="391.60305343511448" y="-454.22535211267609"/>
         </scene>
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
+        <image name="11" width="200" height="300"/>
         <image name="Backward" width="24" height="24"/>
         <image name="likeButtonOn" width="42" height="42"/>
         <image name="share_button" width="50" height="50"/>
