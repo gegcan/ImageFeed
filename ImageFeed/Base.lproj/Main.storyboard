@@ -218,10 +218,17 @@
                                     <action selector="didTapBackButton:" destination="A4I-7o-BSF" eventType="touchUpInside" id="Cdm-Vb-k9o"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="baZ-e2-Blo">
+                                <rect key="frame" x="0.0" y="41" width="393" height="4"/>
+                                <color key="tintColor" name="YP Black"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tq7-fP-oeJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="baZ-e2-Blo" firstAttribute="leading" secondItem="Tq7-fP-oeJ" secondAttribute="leading" id="3JC-RI-sMF"/>
+                            <constraint firstItem="baZ-e2-Blo" firstAttribute="top" secondItem="weA-0O-T7w" secondAttribute="bottom" constant="8" symbolic="YES" id="Edg-Kq-byQ"/>
+                            <constraint firstItem="baZ-e2-Blo" firstAttribute="trailing" secondItem="Tq7-fP-oeJ" secondAttribute="trailing" id="XpO-qo-54d"/>
                             <constraint firstItem="Tq7-fP-oeJ" firstAttribute="bottom" secondItem="ynX-YQ-12p" secondAttribute="bottom" id="acy-nI-soI"/>
                             <constraint firstItem="ynX-YQ-12p" firstAttribute="top" secondItem="Tq7-fP-oeJ" secondAttribute="top" id="edO-1O-HxY"/>
                             <constraint firstItem="ynX-YQ-12p" firstAttribute="leading" secondItem="Tq7-fP-oeJ" secondAttribute="leading" id="fwe-gA-ZMT"/>
@@ -231,12 +238,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="progressView" destination="baZ-e2-Blo" id="QKp-eg-aVw"/>
                         <outlet property="webView" destination="ynX-YQ-12p" id="p6c-nN-irn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIG-05-7Kt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="393" y="-1156"/>
+            <point key="canvasLocation" x="391.60305343511448" y="-1156.3380281690143"/>
         </scene>
         <!--Single Image View Controller-->
         <scene sceneID="9iH-Q8-7Lh">
