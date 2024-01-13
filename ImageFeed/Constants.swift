@@ -8,14 +8,9 @@
 import UIKit
 
 enum ApiConstants: String {
-    case AccessKey = "DZIp8v9L5885uHlDWzJEZJxeMyMECgVCYh9SBBxtfq0"
-    case SecretKey = "ktshwGtS-nwuVStFeUoUtA48DFuXOHUxbhf9QGol-OM"
-    case RedirectURI = "urn:ietf:wg:oauth:2.0:oob"
-    case AccessScope = "public+read_user+write_likes"
+    case accessKey = "DZIp8v9L5885uHlDWzJEZJxeMyMECgVCYh9SBBxtfq0"
+    case secretKey = "ktshwGtS-nwuVStFeUoUtA48DFuXOHUxbhf9QGol-OM"
+    case redirectURI = "urn:ietf:wg:oauth:2.0:oob"
+    case accessScope = "public+read_user+write_likes"
+    case defaultBaseURL = "https://api.unsplash.com"
 }
-
-//let AccessKey = "DZIp8v9L5885uHlDWzJEZJxeMyMECgVCYh9SBBxtfq0"
-//let SecretKey = "ktshwGtS-nwuVStFeUoUtA48DFuXOHUxbhf9QGol-OM"
-//let RedirectURI = "urn:ietf:wg:oauth:2.0:oob"
-//let AccessScope = "public+read_user+write_likes"
-let DefaultBaseURL = URL(string: "https://api.unsplash.com")!
