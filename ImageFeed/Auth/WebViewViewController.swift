@@ -16,7 +16,7 @@ protocol WebViewViewControllerDelegate: AnyObject {
 final class WebViewViewController: UIViewController {
     
     private enum Constants {
-       static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
+        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     }
     
     @IBOutlet private var webView: WKWebView!
@@ -54,6 +54,7 @@ final class WebViewViewController: UIViewController {
             context: nil)
         updateProgress()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         webView.removeObserver(
@@ -94,7 +95,7 @@ extension WebViewViewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
-
+    
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if
             let url = navigationAction.request.url,
