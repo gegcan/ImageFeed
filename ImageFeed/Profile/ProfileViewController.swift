@@ -8,57 +8,55 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-    private var avatarImageView = UIImageView()
-    private var nameLabel = UILabel()
-    private var loginNameLabel = UILabel()
-    private var descriptionLabel = UILabel()
-    private var logoutButton = UIButton()
+    
+    private let avatarImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "avatar")
+        view.layer.cornerRadius = view.frame.height / 2
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    private var nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Екатерина Новикова"
+        label.textColor = UIColor(named: "YP White")
+        label.font = .boldSystemFont(ofSize: 23)
+        return label
+    }()
+    
+    private var loginNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "@ekaterina_nov"
+        label.textColor = UIColor(named: "YP Gray")
+        label.font = .systemFont(ofSize: 13)
+        return label
+    }()
+    
+    private var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Hello, world!"
+        label.textColor = UIColor(named: "YP White")
+        label.font = .systemFont(ofSize: 13)
+        return label
+    }()
+    
+    private var logoutButton: UIButton = {
+        let button = UIButton()
+        let buttonImage = UIImage(named: "logout_button")
+        button.setImage(buttonImage, for: .normal)
+        button.addTarget(ProfileViewController.self, action: #selector(didTapLogoutButton), for: .touchUpInside)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupConstraints()
-        
-        avatarImageConfigure()
-        nameLabelConfigure()
-        loginNameLabelConfigure()
-        descriptionLabelConfigure()
-        logoutButtonConfigure()
-    }
-    
-    private func avatarImageConfigure() {
-        avatarImageView.image = UIImage(named: "avatar")
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
-        avatarImageView.clipsToBounds = true
-        
-    }
-    
-    private func nameLabelConfigure() {
-        nameLabel.text = "Екатерина Новикова"
-        nameLabel.textColor = UIColor(named: "YP White")
-        nameLabel.font = .boldSystemFont(ofSize: 23)
-    }
-    
-    private func loginNameLabelConfigure() {
-        loginNameLabel.text = "@ekaterina_nov"
-        loginNameLabel.textColor = UIColor(named: "YP Gray")
-        loginNameLabel.font = .systemFont(ofSize: 13)
-    }
-    
-    private func descriptionLabelConfigure() {
-        descriptionLabel.text = "Hello, world!"
-        descriptionLabel.textColor = UIColor(named: "YP White")
-        descriptionLabel.font = .systemFont(ofSize: 13)
-    }
-    
-    private func logoutButtonConfigure() {
-        let buttonImage = UIImage(named: "logout_button")
-        logoutButton.setImage(buttonImage, for: .normal)
-        logoutButton.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
     }
     
     @objc func didTapLogoutButton() {
-        
+        // TODO: - Реализовать логику Logout
     }
 }
 
