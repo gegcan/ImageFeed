@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - HTTP Request
-let urlDefault = URL(string: ApiConstants.defaultBaseURL.rawValue)!
+let urlDefault = URL(string: ApiConstants.defaultBaseURL)!
 
 extension URLRequest {
     static func makeHTTPRequest(
