@@ -7,40 +7,36 @@
 
 import Foundation
 
-// MARK: - Network Connection
 enum NetworkError: Error {
     case httpStatusCode(Int)
     case urlRequestError(Error)
-    case urlSessionError
 }
 
 extension URLSession {
-    func data(
+    func objectTask<T: Decodable>(
         for request: URLRequest,
-        completion: @escaping (Result<Data, Error>) -> Void
+        completion: @escaping (Result<T, Error>) -> Void
     ) -> URLSessionTask {
-        let fulfillCompletion: (Result<Data, Error>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
         let task = dataTask(with: request, completionHandler: { data, response, error in
-            if let data = data,
-               let response = response,
-               let statusCode = (response as? HTTPURLResponse)?.statusCode
-            {
-                if 200 ..< 300 ~= statusCode {
-                    fulfillCompletion(.success(data))
+            if let error = error {
+                completion(.failure(NetworkError.urlRequestError(error)))
+            }
+            if let responseCode = (response as? HTTPURLResponse)?.statusCode {
+                if 200..<300 ~= responseCode {
                 } else {
-                    fulfillCompletion(.failure(NetworkError .httpStatusCode(statusCode)))
+                    completion(.failure(NetworkError.httpStatusCode(responseCode)))
                 }
-            } else if let error = error {
-                fulfillCompletion(.failure(NetworkError.urlRequestError(error)))
-            } else {
-                fulfillCompletion(.failure(NetworkError.urlSessionError))
+            }
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let result = try decoder.decode(T.self, from: data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(error))
+                }
             }
         })
-        task.resume()
         return task
     }
 }

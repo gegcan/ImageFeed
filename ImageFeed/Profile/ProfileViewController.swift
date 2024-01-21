@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import WebKit
+import SwiftKeychainWrapper
 
 final class ProfileViewController: UIViewController {
+    
+    private var profileService = ProfileService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     private let avatarImageView: UIImageView = {
         let view = UIImageView()
@@ -45,7 +50,7 @@ final class ProfileViewController: UIViewController {
         let button = UIButton()
         let buttonImage = UIImage(named: "logout_button")
         button.setImage(buttonImage, for: .normal)
-        button.addTarget(ProfileViewController.self, action: #selector(didTapLogoutButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
         return button
     }()
     
@@ -53,10 +58,60 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setupConstraints()
+        
+        if let profile = profileService.getProfile() {
+            nameLabel.text = profile.name
+            loginNameLabel.text = profile.loginName
+            descriptionLabel.text = profile.bio
+        }
+        
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar(avatarImageView)
+            }
+        updateAvatar(avatarImageView)
+    }
+    
+    private func updateAvatar(_ avatarImageView: UIImageView) {
+        avatarImageView.image = ProfileImageService.shared.avatar.image
     }
     
     @objc func didTapLogoutButton() {
-        // TODO: - Реализовать логику Logout
+        let alert = UIAlertController(title: "До свидания!", message: "Уверены, что хотите выйти?", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            KeychainWrapper.standard.removeAllKeys()
+            self.peel()
+            self.switchToSplashViewController()
+        }
+        
+        let noAction = UIAlertAction(title: "Нет", style: .cancel)
+        
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func switchToSplashViewController() {
+        let splashViewController = SplashViewController()
+        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        window.rootViewController = splashViewController
+    }
+    
+    private func peel() {
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+            }
+        }
     }
 }
 
