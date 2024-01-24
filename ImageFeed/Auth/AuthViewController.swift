@@ -12,7 +12,7 @@ protocol AuthViewControllerDelegate: AnyObject {
     func acceptToken(code: String)
 }
 
-class AuthViewController: UIViewController {
+final class AuthViewController: UIViewController {
     let showWebViewIdentifier = "ShowWebView"
     weak var delegate: AuthViewControllerDelegate?
     

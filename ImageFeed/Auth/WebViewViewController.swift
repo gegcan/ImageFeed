@@ -20,8 +20,8 @@ final class WebViewViewController: UIViewController {
     weak var delegate: WebViewViewControllerDelegate?
     private var estimatedProgressObservation: NSKeyValueObservation?
     
-    @IBOutlet private var webView: WKWebView!
-    @IBOutlet private var progressView: UIProgressView!
+    @IBOutlet private weak var webView: WKWebView!
+    @IBOutlet private weak var progressView: UIProgressView!
 
     @IBAction private func didTapBackButton(_ sender: Any?) {
         delegate?.webViewViewControllerDidCancel(self)
@@ -58,6 +58,7 @@ final class WebViewViewController: UIViewController {
     }
 }
 
+// MARK: - WebViewViewControllerDelegate
 extension WebViewViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,

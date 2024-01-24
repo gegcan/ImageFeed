@@ -5,9 +5,9 @@
 //  Created by Александр Гегешидзе on 20.11.2023.
 //
 
+import SwiftKeychainWrapper
 import UIKit
 import WebKit
-import SwiftKeychainWrapper
 
 final class ProfileViewController: UIViewController {
     
@@ -57,6 +57,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
         setupConstraints()
         
         if let profile = profileService.getProfile() {
@@ -81,7 +82,7 @@ final class ProfileViewController: UIViewController {
         avatarImageView.image = ProfileImageService.shared.avatar.image
     }
     
-    @objc func didTapLogoutButton() {
+    @objc private func didTapLogoutButton() {
         let alert = UIAlertController(title: "До свидания!", message: "Уверены, что хотите выйти?", preferredStyle: .alert)
         
         let yesAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
@@ -116,7 +117,8 @@ final class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController {
-    private func setupConstraints() {
+    
+    private func setupViews() {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(avatarImageView)
         
@@ -131,7 +133,9 @@ extension ProfileViewController {
         
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoutButton)
-        
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             avatarImageView.heightAnchor.constraint(equalToConstant: 70),
             avatarImageView.widthAnchor.constraint(equalToConstant: 70),
