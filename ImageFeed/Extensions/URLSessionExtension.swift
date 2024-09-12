@@ -1,0 +1,42 @@
+//
+//  NetworkConnection.swift
+//  ImageFeed
+//
+//  Created by Александр Гегешидзе on 14.01.2024.
+//
+
+import Foundation
+
+enum NetworkError: Error {
+    case httpStatusCode(Int)
+    case urlRequestError(Error)
+}
+
+extension URLSession {
+    func objectTask<T: Decodable>(
+        for request: URLRequest,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) -> URLSessionTask {
+        let task = dataTask(with: request, completionHandler: { data, response, error in
+            if let error = error {
+                completion(.failure(NetworkError.urlRequestError(error)))
+            }
+            if let responseCode = (response as? HTTPURLResponse)?.statusCode {
+                if 200..<300 ~= responseCode {
+                } else {
+                    completion(.failure(NetworkError.httpStatusCode(responseCode)))
+                }
+            }
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let result = try decoder.decode(T.self, from: data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        })
+        return task
+    }
+}
